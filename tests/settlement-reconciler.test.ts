@@ -42,7 +42,9 @@ describe("settlement-reconciler", () => {
     expect(reconciler.size()).toBe(3);
     expect(reconciler.getByTxHash("0xAAAA1111")?.amount).toBe("1000");
 
-    const payer1Receipts = reconciler.getByPayer("0x1111111111111111111111111111111111111111");
+    const payer1Receipts = reconciler.getByPayer(
+      "0x1111111111111111111111111111111111111111",
+    );
     expect(payer1Receipts.length).toBe(2);
   });
 
@@ -67,7 +69,7 @@ describe("settlement-reconciler", () => {
 
     const failed = reconciler.query({ success: false });
     expect(failed.length).toBe(1);
-    expect(failed[0].txHash).toBe("0xcccc3333");
+    expect(failed[0]?.txHash).toBe("0xcccc3333");
 
     const limited = reconciler.query({ limit: 1 });
     expect(limited.length).toBe(1);

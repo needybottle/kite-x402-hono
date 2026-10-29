@@ -53,9 +53,13 @@ export class SettlementReconciler {
         const evicted = this.receiptsByTx.get(oldestTx);
         this.receiptsByTx.delete(oldestTx);
         if (evicted) {
-          const payerList = this.receiptsByPayer.get(evicted.payer.toLowerCase());
+          const payerList = this.receiptsByPayer.get(
+            evicted.payer.toLowerCase(),
+          );
           if (payerList) {
-            const idx = payerList.findIndex((r) => r.txHash.toLowerCase() === oldestTx);
+            const idx = payerList.findIndex(
+              (r) => r.txHash.toLowerCase() === oldestTx,
+            );
             if (idx !== -1) payerList.splice(idx, 1);
           }
         }
